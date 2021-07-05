@@ -1,6 +1,10 @@
 module Spree
   module Admin
     class MailchimpSettingsController < ResourceController
+      before_action do
+        Rails.application.routes.default_url_options[:host] = request.base_url
+      end
+      
       def index
         path = model_class.first ? edit_admin_mailchimp_setting_path(model_class.first.id) : new_admin_mailchimp_setting_path
         redirect_to path
